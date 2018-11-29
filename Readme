@@ -1,1 +1,0 @@
-docker run --rm --privileged -it  -e AWSACCESSKEYID=$AWSACCESSKEYID -e AWSSECRETACCESSKEY=$AWSSECRETACCESSKEY -e BUCKET=spotfeedgirocount -e MOUNTPOINT=/test -d --name tests3 s3sidecar
