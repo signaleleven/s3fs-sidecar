@@ -6,5 +6,5 @@ mkdir -p $MOUNTPOINT
 [[ -z "${S3GID}" ]] || FUSE_OPTS="$FUSE_OPTS -o gid=${S3GID}"
 
 
-s3fs  $BUCKET $MOUNTPOINT  $FUSE_OPTS &&  echo $BUCKET mounted on $MOUNTPOINT...
+s3fs  $BUCKET $MOUNTPOINT  $FUSE_OPTS -ouse_cache=/tmp &&  echo $BUCKET mounted on $MOUNTPOINT...
 trap : TERM INT; (while true; do sleep 10; done) & wait
