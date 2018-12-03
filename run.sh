@@ -4,9 +4,8 @@ mkdir -p $MOUNTPOINT
 
 [[ -z "${S3UID}" ]] || FUSE_OPTS="$FUSE_OPTS -o uid=${S3UID}"
 [[ -z "${S3GID}" ]] || FUSE_OPTS="$FUSE_OPTS -o gid=${S3GID}"
+[[ -z "${AUTOROLE}" ]] || FUSE_OPTS="$FUSE_OPTS -o iam_role=auto"
+[[ -z "${ALLOWEMPTY}" ]] || FUSE_OPTS="$FUSE_OPTS -o nonempty"
 
-
-s3fs  $BUCKET $MOUNTPOINT  $FUSE_OPTS -ouse_cache=/tmp &&  echo $BUCKET mounted on $MOUNTPOINT...
-
-
-sleep infinity & PID=$! ; trap "kill $PID" TERM STOP INT ;wait ;echo exited
+echo Mounting $BUCKET  on $MOUNTPOINT...
+exec s3fs  $BUCKET $MOUNTPOINT  $FUSE_OPTS -o use_cache=/tmp -f
